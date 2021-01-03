@@ -1,4 +1,5 @@
 import 'package:daily_exercise_app/constants.dart';
+import 'package:daily_exercise_app/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,6 +30,19 @@ class HomeScreen extends StatelessWidget {
     var size = MediaQuery.of(context)
         .size; //This gonna give us a total width and height of our device!!!
     return Scaffold(
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        height: 70,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            BottomNavItem(),
+            BottomNavItem(),
+            BottomNavItem(),
+          ],
+        ),
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -79,10 +93,56 @@ class HomeScreen extends StatelessWidget {
                       icon: SvgPicture.asset("assets/icons/search.svg"),
                     ),
                   ),
-                )
+                ),
+                Expanded(
+                    child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: .85,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  children: <Widget>[
+                    CategoryCard(
+                      title: "Diet Recommendation",
+                      svgSrc: "assets/icons/Hamburger.svg",
+                      press: () {},
+                    ),
+                    CategoryCard(
+                        title: "Kegel Exercises",
+                        svgSrc: "assets/icons/Excrecises.svg",
+                        press: () {}),
+                    CategoryCard(
+                        title: "Meditation",
+                        svgSrc: "assets/icons/Meditation.svg",
+                        press: () {}),
+                    CategoryCard(
+                        title: "Yoga",
+                        svgSrc: "assets/icons/yoga.svg",
+                        press: () {}),
+                  ],
+                ))
               ],
             ),
           ))
+        ],
+      ),
+    );
+  }
+}
+
+class BottomNavItem extends StatelessWidget {
+  final String svgIcon;
+  final String title;
+  const BottomNavItem({Key key, this.svgIcon, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SvgPicture.asset("assets/icons/calendar.svg"),
+          Text("Today")
         ],
       ),
     );
