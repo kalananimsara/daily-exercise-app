@@ -1,4 +1,5 @@
 import 'package:daily_exercise_app/constants.dart';
+import 'package:daily_exercise_app/widgets/bottom_nav_bar.dart';
 import 'package:daily_exercise_app/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,19 +31,7 @@ class HomeScreen extends StatelessWidget {
     var size = MediaQuery.of(context)
         .size; //This gonna give us a total width and height of our device!!!
     return Scaffold(
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        height: 70,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BottomNavItem(),
-            BottomNavItem(),
-            BottomNavItem(),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -129,20 +118,33 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class BottomNavItem extends StatelessWidget {
-  final String svgIcon;
-  final String title;
-  const BottomNavItem({Key key, this.svgIcon, this.title}) : super(key: key);
+class BottomNavBar extends StatelessWidget {
+  const BottomNavBar({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Column(
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      height: 70,
+      color: Colors.white,
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SvgPicture.asset("assets/icons/calendar.svg"),
-          Text("Today")
+        children: [
+          BottomNavItem(
+            title: "Today",
+            svgSrc: "assets/icons/calendar.svg",
+          ),
+          BottomNavItem(
+            title: "All Exercises",
+            svgSrc: "assets/icons/gym.svg",
+            isActive: true,
+          ),
+          BottomNavItem(
+            title: "Settings",
+            svgSrc: "assets/icons/Settings.svg",
+          ),
         ],
       ),
     );
