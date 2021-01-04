@@ -1,6 +1,8 @@
 import 'package:daily_exercise_app/constants.dart';
+import 'package:daily_exercise_app/screens/details_screen.dart';
 import 'package:daily_exercise_app/widgets/bottom_nav_bar.dart';
 import 'package:daily_exercise_app/widgets/category_card.dart';
+import 'package:daily_exercise_app/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -70,19 +72,7 @@ class HomeScreen extends StatelessWidget {
                       .display1
                       .copyWith(fontWeight: FontWeight.w900),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 30.0),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(29.0)),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search here..",
-                      icon: SvgPicture.asset("assets/icons/search.svg"),
-                    ),
-                  ),
-                ),
+                SearchBar(),
                 Expanded(
                     child: GridView.count(
                   crossAxisCount: 2,
@@ -102,7 +92,12 @@ class HomeScreen extends StatelessWidget {
                     CategoryCard(
                         title: "Meditation",
                         svgSrc: "assets/icons/Meditation.svg",
-                        press: () {}),
+                        press: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return DetailsScreen();
+                          }));
+                        }),
                     CategoryCard(
                         title: "Yoga",
                         svgSrc: "assets/icons/yoga.svg",
